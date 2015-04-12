@@ -38,7 +38,7 @@ QVariant TreeModel::headerData(int section, Qt::Orientation orientation, int rol
             return QString( "Xpos" );
     case 3:
         if ( role == Qt::DisplayRole )
-            return QString( "Ypos" );
+            return QString( "Yposs" );
     default:
         return QVariant();
     }
