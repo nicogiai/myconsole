@@ -38,7 +38,7 @@ QVariant TreeModel::headerData(int section, Qt::Orientation orientation, int rol
             return QString( "Xpos" );
     case 3:
         if ( role == Qt::DisplayRole )
-            return QString( "Yposs" );
+            return QString( "Ypos" );
     default:
         return QVariant();
     }
@@ -167,14 +167,22 @@ bool TreeModel::setData(const QModelIndex &index, const QVariant &value, int rol
     if ( index.isValid() && role == customRole::XposRole)
     {
         p->setProperty("xpos", value.toInt());
-        emit dataChanged(index, index);
+        //qDebug() << "TreeModel xpos" << __FUNCTION__ << "column" << index.column();
+
+        QModelIndex correctedIndex = TreeModel::index( index.row(), 2, index.parent() );
+        emit dataChanged( correctedIndex, correctedIndex );
+
+        //emit dataChanged(index, index);
         return true;
     }
 
     if ( index.isValid() && role == customRole::YposRole)
     {
         p->setProperty("ypos", value.toInt());
-        emit dataChanged(index, index);
+        //qDebug() << "TreeModel xpos" << __FUNCTION__;
+        QModelIndex correctedIndex = TreeModel::index( index.row(), 3, index.parent() );
+        emit dataChanged( correctedIndex, correctedIndex );
+        //emit dataChanged(index, index);
         return true;
     }
 

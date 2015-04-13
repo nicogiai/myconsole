@@ -7,6 +7,11 @@ GraphicsScene::GraphicsScene(TreeModel *model, QObject *parent) :
 {
     this->m_model = model;
 
+    //it configures how fast the scene will be updated
+    timer = new QTimer(this);
+    timer->setInterval(1000);
+    connect( timer, SIGNAL(timeout()), this, SLOT(advance()));
+    timer->start();
 }
 
 /// this wrapper function is here to enable all QGraphicsItems to query for data

@@ -35,6 +35,11 @@ public:
     ** the connection 3 (out of 7 connections) all QPersistentModelIndex (4,5,6,7) are
     ** automatically updated to the new pos: 3,4,5,6 which is very important! */
     QPersistentModelIndex index;
+
+    QPointF newpos;
+    void advance(int phase);
+    //enum { Type = UserType + 1 };
+    //int type() const { return Type; }
     
 };
 

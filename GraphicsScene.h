@@ -4,6 +4,8 @@
 #include <QGraphicsScene>
 #include <QPersistentModelIndex>
 #include <QVariant>
+#include <QTimer>
+
 
 #include "MyGraphicsItem.h"
 #include "TreeModel.h"
@@ -31,6 +33,7 @@ public:
 private:
     /*! the GraphicsScene visualizes the data of this model */
     TreeModel *m_model;
+    QTimer *timer;
 
     /*! converts a QPersistentModelIndex into a QGraphicsItem
     ** the QGraphicsScene stores all graphical objects and in those objects

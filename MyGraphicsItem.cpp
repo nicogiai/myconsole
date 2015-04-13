@@ -2,6 +2,7 @@
 #include <QDebug>
 #include "GraphicsScene.h"
 #include <QKeyEvent>
+#include <QDebug>
 
 MyGraphicsItem::MyGraphicsItem(QPersistentModelIndex index)
 {
@@ -18,18 +19,17 @@ void MyGraphicsItem::keyPressEvent(QKeyEvent *event)
 
     if( event->key() == Qt::Key_Left) {
         setPos( x()-10, y());
+        setModelData( scene(), index, x(), customRole::XposRole);
     } else if( event->key() == Qt::Key_Right) {
         setPos( x()+10, y());
+        setModelData( scene(), index, x(), customRole::XposRole);
     } else if( event->key() == Qt::Key_Up) {
-        setPos( x(), y()-10);
+        setPos( x(), y()-10);      
+        setModelData( scene(), index, y(), customRole::YposRole);
     } else if( event->key() == Qt::Key_Down) {
-        setPos( x(), y()+10);
+        setPos( x(), y()+10);  
+        setModelData( scene(), index, y(), customRole::YposRole);
     }
-
-    setModelData( scene(), index, pos().x(), customRole::XposRole);
-    setModelData( scene(), index, pos().y(), customRole::YposRole);
-
-    //emit dataCha
 
 }
 
@@ -55,4 +55,24 @@ void MyGraphicsItem::updateData() {
     this->setPos(xpos, ypos);
     update();
 
+}
+
+void MyGraphicsItem::advance(int phase)
+{
+    if( phase == 0 )
+    {
+        //calculate new position
+        //qDebug() << "Calculate New pos";
+
+        newpos.setX( modelData ( scene(), index, customRole::XposRole ).toInt() );
+        newpos.setY( modelData ( scene(), index, customRole::YposRole ).toInt() );
+
+    } else {
+        //change position
+        //qDebug() << "New pos?";
+        if( newpos != pos() ){
+            //qDebug() << "Set New pos";
+            setPos(newpos);
+        }
+    }
 }

@@ -103,7 +103,7 @@ void ItemView::rowsAboutToBeRemoved ( const QModelIndex & parent, int start, int
 }
 
 void ItemView::dataChanged ( const QModelIndex & topLeft, const QModelIndex & bottomRight ) {
-    qDebug() << __FUNCTION__;
+    qDebug() << "ItemView" << __FUNCTION__;
 
     QModelIndex tmpIndex = topLeft;
 
