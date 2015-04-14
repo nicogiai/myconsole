@@ -12,7 +12,7 @@ namespace customRole {
     IdRole = Qt::UserRole, // UserRole is the first number one can use for selfassigned roles by the Qt-toolkit
     XposRole,
     YposRole,
-    TypeRole // used by views to query a QModelIndex for its type [NODE or NODE_CONNECTION .. or whatever]
+    TypeRole // used by views to query a QModelIndex for its type [ROOT, NODE .. or whatever]
   };
 }
 
@@ -22,6 +22,8 @@ namespace ViewTreeItemType {
   enum TreeItemType {
     ROOT,
     NODE,
+    AIRCRAFT,
+    RADAR,
     UNKNOWN
   };
 }

@@ -8,9 +8,11 @@
 
 /*! TreeItemType /struct */
 enum TreeItemType {
-  ROOT,
-  NODE,
-  UNKNOWN
+    ROOT,
+    NODE,
+    AIRCRAFT,
+    RADAR,
+    UNKNOWN
 };
 
 class AbstractTreeItem : public ObjectProperty

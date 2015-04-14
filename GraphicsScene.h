@@ -13,26 +13,32 @@
 class GraphicsScene : public QGraphicsScene
 {
     Q_OBJECT
+    friend class AbstractGraphicsItemModelExtension;
+    friend class ItemView;
 public:
     explicit GraphicsScene(TreeModel *model, QObject *parent = 0);
     
     /*! a wrapper function for all items in the scene, so that they can call data() directly */
     QVariant data( const QModelIndex &index, int role ) const;
+
     /*! a wrapper function for all items in the scene, so that they can call setData() directly */
     bool setData( const QModelIndex & index, const QVariant & value, int role = Qt::EditRole );
 
     /*! callback function which is called from the Model->ItemView->GraphicsScene to notify about changed node(s) */
     void updateNode( QPersistentModelIndex item );
+
     /*! updates a node based on item pointer */
     void updateNode( QGraphicsItem* item );
 
-//protected:
+protected:
     /*! callback function which is called from the Model->ItemView->GraphicsScene to notify about new player(s) */
     QGraphicsItem* playerInserted( QPersistentModelIndex item );
 
 private:
     /*! the GraphicsScene visualizes the data of this model */
     TreeModel *m_model;
+
+    /*! timer in order to update Graphics Items on the scene */
     QTimer *timer;
 
     /*! converts a QPersistentModelIndex into a QGraphicsItem
@@ -42,7 +48,7 @@ private:
     **
     ** a general compare function had to be implemented: compareIndexes
     ** since this implementation doesn't use
-    ** column BUT columns somehow whxere reported to be different, meaning: a stored index could have column 3
+    ** column BUT columns somehow where reported to be different, meaning: a stored index could have column 3
     ** while the treeView would make a difference because the treeView uses the columns to distinguish between
     ** different entries in the hierarchical view (the treeView) where for instance column 3 shows the node name
     ** and column 4 shows the symbol_index of a connection*/
@@ -63,8 +69,8 @@ signals:
 public slots:
 
 protected slots:
-    /*! this is similar to clear() in qt 4.4 but as we need to remove all connections
-    ** and then all nodes this is the way we go*/
+    /*! this is similar to clear() in qt 4.4 but as we need to remove all players
+    ** and then all stuff this is the way we go*/
     void clearScene();
     
 };

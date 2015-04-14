@@ -15,7 +15,7 @@ MyGraphicsItem::MyGraphicsItem(QPersistentModelIndex index)
 
 void MyGraphicsItem::keyPressEvent(QKeyEvent *event)
 {
-    qDebug() << "MyRect press hkey";
+    //qDebug() << "MyRect press hkey";
 
     if( event->key() == Qt::Key_Left) {
         setPos( x()-10, y());
@@ -61,7 +61,7 @@ void MyGraphicsItem::advance(int phase)
 {
     if( phase == 0 )
     {
-        //calculate new position
+        //calculate-get new position
         //qDebug() << "Calculate New pos";
 
         newpos.setX( modelData ( scene(), index, customRole::XposRole ).toInt() );
